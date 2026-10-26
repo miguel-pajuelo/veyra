@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Veyra: contexto, decisiones, roadmap, requisitos y criterios de auditoría de un proyecto open source de personalización de Spotify para Windows.">
+  <meta name="color-scheme" content="light">
+  <title>Veyra — Roadmap y contexto del proyecto</title>
+  <style>
+    :root{--paper:#f7f8f4;--white:#fff;--ink:#172b25;--muted:#56665e;--line:#dce3da;--forest:#163c2e;--deep:#0d271f;--accent:#d7f47c;--soft:#edf2e9;--mint:#d8eee2;--amber:#fff1cf;--amber-ink:#6a4b12;--radius:18px;--shadow:0 15px 45px #163c2e0b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.65}button,a,summary{-webkit-tap-highlight-color:transparent}a{color:#225d43;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #477d30;outline-offset:4px}button{font:inherit;cursor:pointer}button:disabled{cursor:default}strong{font-weight:650}h1,h2,h3,p{margin-top:0}h2{font-size:clamp(25px,3vw,34px);line-height:1.2;letter-spacing:-.8px;margin-bottom:18px}h3{font-size:20px;line-height:1.35;margin-bottom:12px}p{margin-bottom:18px}ul,ol{padding-left:23px;margin-top:10px;margin-bottom:20px}li+li{margin-top:7px}code{font-family:Consolas,"Courier New",monospace;font-size:.91em;background:var(--soft);padding:2px 6px;border-radius:5px;overflow-wrap:anywhere}pre{margin:20px 0;padding:23px;background:var(--deep);color:#e3eedc;border-radius:12px;overflow:auto;font:14px/1.6 Consolas,monospace}pre code{padding:0;background:none;color:inherit}.skip{position:absolute;top:-100px;left:20px;padding:12px;background:var(--white);z-index:99}.skip:focus{top:10px}.layout{display:grid;grid-template-columns:255px minmax(0,1fr);max-width:1600px;margin:auto;min-height:100vh}.sidebar{padding:32px 23px;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--paper)}.brand{display:flex;gap:11px;align-items:center;margin-bottom:30px;font-weight:750;font-size:27px;letter-spacing:-1px}.logo{width:38px;height:38px;border-radius:12px;background:var(--forest);color:var(--accent);display:grid;place-items:center;font-size:25px;font-weight:750;line-height:1}.brand small{display:block;letter-spacing:.5px;color:var(--muted);font-size:10px;font-weight:600;margin-top:-4px}.nav-label,.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700}.nav-label{color:var(--muted);margin-bottom:12px}.toc{display:grid;gap:4px}.toc a{display:flex;gap:10px;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-size:13px;line-height:1.5}.toc a span{font-variant-numeric:tabular-nums;color:#748275;font-size:11px;padding-top:2px;min-width:18px}.toc a:hover,.toc a[aria-current="location"]{background:#e7eddf;color:var(--ink)}.side-note{margin-top:25px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.side-note strong{color:var(--ink)}.side-note p{margin-bottom:12px}.main{min-width:0;padding:36px 52px 0}.topline{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:25px;font-size:12px;color:var(--muted)}.top-actions{display:flex;flex-wrap:wrap;gap:9px}.button{border:1px solid #cbd6c8;border-radius:8px;padding:8px 12px;background:transparent;color:var(--ink);font-size:12px;font-weight:600}.button:hover{background:#e8eedf}.hero{position:relative;background:var(--forest);border-radius:24px;color:#f4f7ef;padding:46px 46px 36px;overflow:hidden}.hero:after{content:"V";position:absolute;right:20px;top:-70px;font-size:360px;line-height:1.2;color:#ffffff06;font-weight:800;pointer-events:none}.hero .eyebrow{color:var(--accent);position:relative;z-index:1}.hero h1{font-size:clamp(54px,8vw,94px);letter-spacing:-5px;line-height:1.1;margin:13px 0 8px;position:relative;z-index:1}.tagline{font-size:clamp(20px,3vw,28px);letter-spacing:-.6px;margin-bottom:26px;color:#eef5e4;position:relative;z-index:1}.hero-intro{max-width:640px;color:#d2e0d4;font-size:15px;position:relative;z-index:1;margin-bottom:28px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}.pill{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:650;line-height:1.45}.pill.light{background:#ffffff12;color:#e2edd9;border:1px solid #ffffff22}.pill.green{background:var(--accent);color:#20351b}.pill.pending{background:var(--amber);color:var(--amber-ink)}.pill.neutral{background:var(--soft);color:#445449}.hero-bottom{position:relative;z-index:1;display:flex;gap:28px;flex-wrap:wrap;border-top:1px solid #ffffff25;margin-top:30px;padding-top:22px;font-size:12px;color:#bdcfbf}.hero-bottom b{display:block;color:#eff5e9;font-weight:600;margin-bottom:3px}.abstract{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:22px 0 36px}.abstract article{background:var(--white);padding:23px;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.abstract h2{font-size:17px;letter-spacing:0;margin-bottom:10px}.abstract p{font-size:14px;color:var(--muted);margin-bottom:0}.section{padding:32px 0 34px;border-top:1px solid var(--line);scroll-margin-top:25px}.section-head{display:flex;align-items:baseline;gap:15px}.section-number{font-size:12px;font-weight:700;color:#64804e;font-variant-numeric:tabular-nums}.lead{font-size:18px;line-height:1.65}.muted{color:var(--muted)}.small{font-size:13px}.note{background:var(--soft);border-left:3px solid #779e48;border-radius:0 10px 10px 0;padding:17px 20px;margin:22px 0;font-size:14px}.note p:last-child{margin-bottom:0}.note.amber{background:#fcf4e3;border-left-color:#b99442}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:20px 0 24px;background:var(--white)}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}caption{text-align:left;padding:14px 17px;font-weight:650;background:#f0f4eb;border-bottom:1px solid var(--line)}thead{background:#edf2e9}th,td{text-align:left;vertical-align:top;padding:13px 16px;border-bottom:1px solid var(--line)}th{font-size:11px;text-transform:uppercase;letter-spacing:.65px;color:#415944;font-weight:700}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#f6f9f1}td:first-child{font-weight:600}td code{white-space:nowrap}.id{display:inline-block;color:#30563b;font-size:11px;font-weight:700;letter-spacing:.3px;white-space:nowrap}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.subpanel{padding:21px;background:var(--white);border:1px solid var(--line);border-radius:12px}.subpanel p:last-child,.subpanel ul:last-child{margin-bottom:0}.subpanel h3{font-size:17px}.scope-out{columns:2;column-gap:35px}.scope-out li{break-inside:avoid}.architecture{padding:25px;background:var(--white);border:1px solid var(--line);border-radius:16px;margin:24px 0}.architecture-title{font-size:11px;letter-spacing:1.1px;color:var(--muted);text-transform:uppercase;margin-bottom:18px}.arch-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;align-items:stretch}.arch-box{border-radius:10px;background:#edf2e9;padding:18px;font-size:13px}.arch-box b{display:block;font-size:15px;margin-bottom:8px}.arch-box small{display:block;color:var(--muted);font-size:12px}.arch-core{background:var(--forest);color:#f0f7e9}.arch-core small{color:#c6d9c9}.arch-links{display:flex;justify-content:space-between;gap:20px;font-size:12px;margin:14px 0 0;color:var(--muted);flex-wrap:wrap}.optional{margin-top:15px;padding-top:15px;border-top:1px dashed #c9d4c5;font-size:12px;color:var(--muted)}.wireframe{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white);margin:24px 0}.wire-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:15px 20px;background:#e8eedf;font-size:13px}.wire-body{display:grid;grid-template-columns:140px 1fr;min-height:190px}.wire-nav{border-right:1px solid var(--line);padding:20px;font-size:12px;color:var(--muted);display:grid;gap:10px;align-content:start}.wire-main{padding:23px}.wire-main h3{font-size:20px;margin-bottom:16px}.album-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.album{font-size:12px}.album-art{height:70px;background:linear-gradient(140deg,#b8c9ac,#e4edd5);border-radius:7px;margin-bottom:7px}.album:nth-child(2) .album-art{background:linear-gradient(140deg,#839d84,#d6e6c9)}.album:nth-child(3) .album-art{background:linear-gradient(140deg,#b7bfa3,#e9e9d9)}.wire-player{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:12px}.concept{font-size:12px;color:var(--muted);margin-top:9px}.phase-toolbar{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin:24px 0 14px}.phase-toolbar p{margin:0;font-size:13px;color:var(--muted)}.phase{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;background:var(--white);overflow:hidden}.phase summary{display:flex;align-items:center;gap:14px;list-style:none;cursor:pointer;padding:18px 20px}.phase summary::-webkit-details-marker{display:none}.phase summary:after{content:"+";font-size:21px;font-weight:400;margin-left:auto;color:#557246}.phase[open] summary:after{content:"−"}.phase-code{font-size:12px;font-weight:750;color:#3e653c;min-width:27px}.phase-title{font-size:16px;font-weight:650;line-height:1.4}.phase summary .pill{margin-left:auto;white-space:nowrap}.phase[open] summary{border-bottom:1px solid var(--line);background:#f1f5ed}.phase-body{padding:20px 23px;font-size:14px}.phase-body h4{font-size:13px;margin:18px 0 7px;color:#315039}.phase-body h4:first-child{margin-top:0}.phase-body ul{margin-top:6px}.phase-result{padding-top:14px;border-top:1px solid var(--line);margin-top:15px}.phase-result p{margin-bottom:6px}.state-flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:18px 0}.state-flow span{background:var(--soft);padding:8px 11px;border-radius:7px;font-size:12px;font-weight:600}.state-flow i{color:#6b8063;font-style:normal}.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:23px 0}.timeline a{text-decoration:none;border-top:4px solid #b8cd9d;background:#edf2e9;border-radius:0 0 7px 7px;padding:11px 8px;font-size:11px;color:var(--ink);text-align:center;line-height:1.5}.timeline a b{display:block;font-size:13px;margin-bottom:4px}.sources{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:11px}.sources li{margin:0;background:var(--white);border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-wrap:anywhere;font-size:13px}.sources a{display:block;font-weight:650;margin-bottom:5px}.sources small{color:var(--muted);font-size:12px}.closing{padding:30px;border-radius:18px;background:var(--forest);color:#e3eedc;margin:25px 0 40px}.closing h3{color:var(--accent);margin-bottom:12px}.closing p:last-child{margin-bottom:0}.footer{border-top:1px solid var(--line);padding:23px 0 30px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:11px}.print-note{display:none}.no-break{break-inside:avoid}.status-key{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+    @media(min-width:1400px){.main{padding-left:65px;padding-right:65px}}
+    @media(max-width:1080px){.layout{grid-template-columns:215px minmax(0,1fr)}.sidebar{padding:25px 15px}.main{padding:28px 30px 0}.hero{padding:35px 32px 30px}.hero h1{letter-spacing:-3px}.arch-grid{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:760px){.layout{display:block}.sidebar{position:relative;height:auto;padding:18px 20px;border-right:0;border-bottom:1px solid var(--line);overflow:visible}.brand{margin-bottom:15px;font-size:24px}.brand small{font-size:10px}.toc{display:flex;gap:5px;flex-wrap:wrap}.toc a{padding:6px 9px;font-size:11px}.toc a span{display:none}.nav-label,.side-note{display:none}.main{padding:22px 20px 0}.hero{padding:30px 25px 25px;border-radius:17px}.hero h1{font-size:68px}.hero:after{font-size:270px;right:-5px;top:-25px}.hero-intro{font-size:14px}.abstract,.grid2{grid-template-columns:1fr}.abstract{gap:12px;margin-bottom:25px}.abstract article{padding:20px}.section{padding:27px 0}.scope-out{columns:1}.sources{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(4,1fr)}th,td{padding:11px 13px}.wide-table table{min-width:620px}.phase summary{padding:16px 14px;gap:10px}.phase-title{font-size:14px}.phase summary .pill{display:none}.phase-body{padding:18px}.closing{padding:23px}.lead{font-size:16px}}
+    @media(max-width:420px){.main{padding-left:15px;padding-right:15px}.sidebar{padding-left:15px;padding-right:15px}.hero{padding-left:21px;padding-right:21px}.hero h1{font-size:60px}.hero-bottom{gap:15px}.wire-body{grid-template-columns:92px 1fr}.wire-nav{padding:15px 10px;font-size:11px}.wire-main{padding:16px 13px}.album-row{gap:7px}.album-art{height:48px}.album{font-size:11px}.timeline{grid-template-columns:repeat(3,1fr)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{@page{size:A4;margin:17mm 15mm}html{scroll-behavior:auto}body{background:#fff;color:#172b25;font-size:10pt;line-height:1.5;print-color-adjust:exact;-webkit-print-color-adjust:exact}.layout{display:block;max-width:none}.sidebar,.top-actions,.phase-toolbar button,.timeline,.skip{display:none!important}.main{padding:0}.topline{margin-bottom:12px;font-size:9pt}.hero{padding:25px 30px;border-radius:12px;break-inside:avoid}.hero h1{font-size:58pt}.tagline{font-size:19pt}.hero-intro{font-size:10pt}.hero-bottom{margin-top:18px;padding-top:15px}.abstract{margin:16px 0 24px}.abstract article{box-shadow:none;padding:15px}.section{padding:22px 0;scroll-margin:0}h2{font-size:20pt;break-after:avoid}h3{font-size:13pt;break-after:avoid}.lead{font-size:11pt}.section-head{break-after:avoid}.table-wrap{overflow:visible;border-radius:0;break-inside:auto}table{font-size:9pt}.wide-table table{min-width:0}thead{display:table-header-group}tr{break-inside:avoid}th,td{padding:8px 9px}.note,.subpanel,.architecture,.wireframe,.sources li,.closing{break-inside:avoid}.arch-grid{grid-template-columns:1fr 1fr 1fr}.phase{break-inside:auto;margin-bottom:14px}.phase summary{break-after:avoid;padding:12px}.phase-title{font-size:11pt}.phase-body{font-size:10pt;padding:14px}.phase:not([open])> :not(summary){display:block!important}.phase-body h4{break-after:avoid}.phase summary:after{display:none}.sources{grid-template-columns:1fr 1fr}.sources li{font-size:9pt}.sources small{font-size:8pt}pre{font-size:9pt;white-space:pre-wrap;break-inside:avoid}.footer{font-size:8pt}.print-note{display:inline}.status-key{margin-top:12px}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#documento">Ir al documento</a>
+<div class="layout">
+  <aside class="sidebar" aria-label="Índice del documento">
+    <div class="brand"><span class="logo" aria-hidden="true">v</span><div>veyra<small>DESKTOP MUSIC TOOLKIT</small></div></div>
+    <div class="nav-label">Documento de proyecto</div>
+    <nav class="toc">
+      <a href="#vision"><span>01</span> Contexto y objetivo</a>
+      <a href="#alcance"><span>02</span> Requisitos y alcance</a>
+      <a href="#decisiones"><span>03</span> Decisiones técnicas</a>
+      <a href="#arquitectura"><span>04</span> Arquitectura y UI</a>
+      <a href="#evidencias"><span>05</span> Evidencias y límites</a>
+      <a href="#roadmap"><span>06</span> Roadmap de ejecución</a>
+      <a href="#validacion"><span>07</span> Pruebas de aceptación</a>
+      <a href="#opensource"><span>08</span> GitHub y open source</a>
+      <a href="#riesgos"><span>09</span> Riesgos</a>
+      <a href="#esfuerzo"><span>10</span> Esfuerzo y cierre</a>
+      <a href="#fuentes"><span>11</span> Fuentes de referencia</a>
+    </nav>
+    <div class="side-note"><p><strong>Base para ejecución y auditoría.</strong><br>Investigación y planificación cerradas.</p><p>Implementación, pruebas en el entorno objetivo y publicación: pendientes.</p><p>19 de octubre de 2026<br>Documento base · versión 1.0</p></div>
+  </aside>
+
+  <main class="main" id="documento">
+    <div class="topline"><span>CONTEXTO · ROADMAP · AUDITORÍA</span><div class="top-actions"><button class="button" type="button" id="expand-all">Expandir fases</button><button class="button" type="button" id="print-document">Imprimir / guardar PDF</button></div></div>
+    <header class="hero">
+      <div class="eyebrow">Proyecto open source · Windows</div>
+      <h1>Veyra</h1>
+      <p class="tagline">Tu música. A tu manera.</p>
+      <p class="hero-intro">Una integración para personalizar Spotify de escritorio y coordinar el tratamiento de anuncios, reutilizando herramientas existentes. Este documento reúne el contexto, las decisiones, el trabajo previsto y los criterios de aceptación para un auditor externo.</p>
+      <div class="hero-tags"><span class="pill green">Planificación cerrada</span><span class="pill light">Spicetify + Skipify</span><span class="pill light">Repositorio público previsto</span></div>
+      <div class="hero-bottom"><div><b>Documento base</b>Versión 1.0 · 19 oct 2026</div><div><b>Plataforma inicial</b>Spotify para Windows</div><div><b>Distribución prevista</b>GitHub · open source</div></div>
+    </header>
+
+    <div class="abstract">
+      <article><h2>Qué se ha decidido</h2><p>Integrar <strong>Spotify oficial + Spicetify + un acompañante basado en Skipify</strong>. Adblockify se comparará como alternativa independiente. Se prioriza reutilizar y corregir solo lo necesario.</p></article>
+      <article><h2>Qué queda por demostrar</h2><p>La instalación, detección y recuperación conjuntas en el entorno objetivo. <strong>No se ha creado ni publicado el repositorio de Veyra</strong>, ni instalado modificaciones como parte de este proyecto.</p></article>
+    </div>
+
+    <section class="section" id="vision" aria-labelledby="h-vision">
+      <div class="section-head"><span class="section-number">01</span><h2 id="h-vision">Contexto y objetivo</h2></div>
+      <p class="lead">Veyra busca una experiencia personalizada de Spotify en ordenador, manteniendo el cliente oficial como reproductor y automatizando su cierre y reapertura cuando aparezca publicidad.</p>
+      <p>El usuario ha comprobado que, en su instalación de escritorio, cerrar Spotify durante un anuncio y volver a abrirlo permite continuar escuchando música. También ha indicado que este comportamiento no se reproduce de la misma manera en el móvil. El proyecto se limita inicialmente a <strong>Windows</strong> y toma ese comportamiento como hipótesis de funcionamiento validada manualmente por el usuario.</p>
+      <p>La solución reutilizará los proyectos disponibles. El desarrollo propio se limitará a la personalización, instalación, configuración, coordinación entre componentes y correcciones justificadas por requisitos o pruebas. No se plantea una reescritura inicial del mecanismo de anuncios.</p>
+      <div class="table-wrap"><table><caption>Ficha de definición</caption><thead><tr><th scope="col">Elemento</th><th scope="col">Definición</th></tr></thead><tbody>
+        <tr><td>Nombre de la aplicación</td><td><strong>Veyra</strong>. Identidad elegida para el proyecto y este documento.</td></tr>
+        <tr><td>Repositorio propuesto</td><td><code>veyra</code>, en la cuenta GitHub del promotor. Nombre propuesto; repositorio todavía no creado.</td></tr>
+        <tr><td>Plataforma inicial</td><td>Windows.</td></tr><tr><td>Reproductor</td><td>Cliente oficial de Spotify.</td></tr>
+        <tr><td>Cuenta objetivo</td><td>La cuenta que ya utiliza el usuario, sin exigir Premium para las funciones básicas previstas de Veyra.</td></tr>
+        <tr><td>Personalización</td><td>Spicetify, tema propio y extensiones necesarias.</td></tr>
+        <tr><td>Mecanismo inicial de anuncios</td><td>Reinicio del cliente, partiendo de Skipify.</td></tr>
+        <tr><td>Alternativa</td><td>Adblockify, evaluado por separado.</td></tr>
+        <tr><td>Distribución</td><td>Repositorio público y open source, con instalación, uso y restauración documentados.</td></tr>
+        <tr><td>Compatibilidad comprometida</td><td>Combinaciones de versiones expresamente probadas e identificadas en cada release.</td></tr>
+      </tbody></table></div>
+      <div class="note"><p><strong>Responsabilidades.</strong> El promotor define el objetivo y las preferencias visuales; la implementación transforma este plan en una integración comprobable; el auditor revisa la trazabilidad entre requisitos, decisiones, código, pruebas y publicación.</p></div>
+    </section>
+
+    <section class="section" id="alcance" aria-labelledby="h-alcance">
+      <div class="section-head"><span class="section-number">02</span><h2 id="h-alcance">Requisitos y alcance</h2></div>
+      <p>Los siguientes requisitos definen la primera versión. Sus identificadores se conservan en la documentación, las incidencias y las pruebas para facilitar la auditoría.</p>
+      <div class="table-wrap wide-table"><table><caption>Requisitos de la primera versión</caption><thead><tr><th scope="col">ID</th><th scope="col">Requisito</th><th scope="col">Condición de cumplimiento</th></tr></thead><tbody>
+        <tr><td><span class="id">R01</span></td><td>Interfaz personalizada</td><td>Spotify utiliza el tema y los ajustes distribuidos con Veyra.</td></tr>
+        <tr><td><span class="id">R02</span></td><td>Gestión automática de anuncios</td><td>El mecanismo seleccionado detecta los anuncios observados y ejecuta el ciclo previsto.</td></tr>
+        <tr><td><span class="id">R03</span></td><td>Recuperación de reproducción</td><td>La música vuelve sin intervención manual en los escenarios de prueba.</td></tr>
+        <tr><td><span class="id">R04</span></td><td>Respeto de acciones del usuario</td><td>Pausar o cerrar Spotify voluntariamente no provoca reaperturas indebidas.</td></tr>
+        <tr><td><span class="id">R05</span></td><td>Control dirigido a Spotify</td><td>El programa no envía órdenes de reproducción a otras aplicaciones.</td></tr>
+        <tr><td><span class="id">R06</span></td><td>Instalación reproducible</td><td>Otro usuario puede preparar la misma combinación siguiendo la documentación.</td></tr>
+        <tr><td><span class="id">R07</span></td><td>Cambios reversibles</td><td>La personalización y el acompañante pueden retirarse conservando los datos personales.</td></tr>
+        <tr><td><span class="id">R08</span></td><td>Publicación open source</td><td>Repositorio público, licencia explícita y atribuciones conservadas.</td></tr>
+        <tr><td><span class="id">R09</span></td><td>Diagnóstico útil</td><td>Los errores se explican y registran sin publicar credenciales ni datos sensibles.</td></tr>
+        <tr><td><span class="id">R10</span></td><td>Compatibilidad declarada</td><td>Cada versión publicada identifica los componentes que se han comprobado.</td></tr>
+        <tr><td><span class="id">R11</span></td><td>Activación controlada</td><td>Inicio automático y funcionamiento en segundo plano configurables.</td></tr>
+        <tr><td><span class="id">R12</span></td><td>Funcionamiento acotado</td><td>Límites de espera y recuperación que evitan bucles de reinicios.</td></tr>
+      </tbody></table></div>
+      <div class="note amber"><p><strong>Recuperación exacta pendiente de prueba.</strong> Se comprobarán canción, posición y cola después del reinicio. No se anunciará la recuperación exacta de los tres elementos hasta demostrarla: depende del cliente y del método de control.</p></div>
+      <h3>Fuera de la primera versión</h3>
+      <ul class="scope-out"><li>Desbloquear DJ personal, Mix, descargas o calidad de audio reservada.</li><li>Sustituir el motor de audio de Spotify.</li><li>Crear un clon completo del cliente desde cero.</li><li>Dar soporte inicial a Android, iOS, macOS o Linux.</li><li>Distribuir binarios de Spotify, credenciales o sesiones de usuarios.</li><li>Mantener varios mecanismos de anuncios actuando a la vez.</li><li>Garantizar compatibilidad con cualquier actualización futura.</li></ul>
+      <p>Las funciones Premium adicionales podrán investigarse después como tareas independientes. Solo se incorporarán como prestaciones cuando exista una implementación que funcione y pruebas que lo acrediten.</p>
+    </section>
+
+    <section class="section" id="decisiones" aria-labelledby="h-decisiones">
+      <div class="section-head"><span class="section-number">03</span><h2 id="h-decisiones">Decisiones técnicas</h2></div>
+      <p class="lead">Reutilizar primero. Adaptar con justificación. Mantener pocas piezas propias.</p>
+      <div class="table-wrap wide-table"><table><caption>Decisiones de arquitectura e integración</caption><thead><tr><th scope="col">Decisión</th><th scope="col">Motivo</th></tr></thead><tbody>
+        <tr><td>Mantener el cliente oficial</td><td>Conserva reproducción, biblioteca, cuenta y navegación existentes.</td></tr>
+        <tr><td>Utilizar Spicetify para la UI</td><td>Proporciona temas, extensiones y páginas personalizadas.</td></tr>
+        <tr><td>Partir de Skipify</td><td>Implementa el mecanismo de reinicio que interesa al usuario.</td></tr>
+        <tr><td>Evitar una reescritura inicial</td><td>Las correcciones responden a requisitos o problemas demostrables.</td></tr>
+        <tr><td>Mantener el reinicio fuera de Spotify</td><td>El acompañante debe seguir ejecutándose cuando el cliente se cierre.</td></tr>
+        <tr><td>Comparar Adblockify por separado</td><td>Permite evaluar otro tratamiento de anuncios sin dificultar el diagnóstico.</td></tr>
+        <tr><td>Un único mecanismo activo</td><td>Facilita las pruebas y la atribución de fallos.</td></tr>
+        <tr><td>Preferir instalación de escritorio</td><td>Reduce el problema documentado de persistencia de Spicetify con Microsoft Store.</td></tr>
+        <tr><td>Publicar una integración propia</td><td>Aporta instalación, configuración, documentación y compatibilidad para terceros.</td></tr>
+      </tbody></table></div>
+      <h3>Papel de cada herramienta</h3>
+      <div class="table-wrap wide-table"><table><thead><tr><th scope="col">Herramienta</th><th scope="col">Uso previsto</th><th scope="col">Posición en Veyra</th></tr></thead><tbody>
+        <tr><td>Spicetify</td><td>Temas, extensiones y personalización del cliente.</td><td>Base de la interfaz.</td></tr>
+        <tr><td>Skipify</td><td>Detección externa y ciclo de reinicio.</td><td>Punto de partida del mecanismo inicial; correcciones acotadas si son necesarias.</td></tr>
+        <tr><td>Adblockify</td><td>Bloqueo de anuncios y ciertos cambios locales de comportamiento declarados por su autor.</td><td>Alternativa para comparación funcional, sin garantía de acceso a Premium.</td></tr>
+        <tr><td>SpotX / BlockTheSpot</td><td>Parches adicionales del cliente.</td><td>Referencias investigadas; no son dependencias iniciales.</td></tr>
+        <tr><td>librespot / Spotube</td><td>Construcción o uso de otros reproductores.</td><td>No encajan en la base elegida de personalizar el cliente oficial.</td></tr>
+        <tr><td>REA</td><td>Investigación de comportamientos que no se resuelvan con el código o las interfaces existentes.</td><td>Herramienta de apoyo, no dependencia de funcionamiento.</td></tr>
+      </tbody></table></div>
+      <p class="small muted">Las prestaciones de terceros descritas en sus repositorios requieren validación sobre la combinación de versiones seleccionada. La revisión de su código o documentación no equivale a una prueba conjunta.</p>
+    </section>
+
+    <section class="section" id="arquitectura" aria-labelledby="h-arquitectura">
+      <div class="section-head"><span class="section-number">04</span><h2 id="h-arquitectura">Arquitectura y experiencia</h2></div>
+      <div class="architecture" role="img" aria-label="Arquitectura: Spicetify personaliza Spotify. Un acompañante externo observa señales y gestiona el reinicio. Una extensión opcional intercambia estado y ajustes con el acompañante. La configuración y el diagnóstico son locales.">
+        <div class="architecture-title">Tres responsabilidades, un mismo cliente</div>
+        <div class="arch-grid"><div class="arch-box"><b>Spicetify + tema Veyra</b><small>Personalización visual y ajustes dentro de Spotify.</small></div><div class="arch-box arch-core"><b>Spotify oficial</b><small>Audio, biblioteca, navegación y sesión de usuario.</small></div><div class="arch-box"><b>Acompañante Windows</b><small>Observación, cierre, reapertura, recuperación y diagnóstico.</small></div></div>
+        <div class="arch-links"><span>Spicetify → personalización del cliente</span><span>Cliente ↔ señales y recuperación ↔ acompañante</span></div>
+        <div class="optional"><strong>Opcional:</strong> extensión de integración para intercambiar estado y ajustes cuando demuestre una mejora. Configuración y registros permanecen en el equipo.</div>
+      </div>
+      <div class="grid2"><article class="subpanel"><h3>Dentro de Spotify</h3><p>Se conserva el motor de reproducción y la sesión iniciada. El trabajo visual utiliza un tema propio y una extensión pequeña cuando sea necesaria.</p><p>Spicetify documenta acceso al estado del reproductor y eventos de cambio de canción, pausa y progreso. La señal concreta que identifique publicidad debe observarse en la versión objetivo.</p></article><article class="subpanel"><h3>Fuera de Spotify</h3><p>Una aplicación de bandeja permanece abierta durante el reinicio. Se ejecuta en la sesión del usuario y ofrece activar, pausar, abrir Spotify, consultar incidencias y salir.</p><p>El control de reproducción deberá dirigirse a Spotify, evitando teclas globales que puedan afectar a otra aplicación.</p></article></div>
+      <h3 style="margin-top:26px">Dirección visual inicial</h3>
+      <p>Interfaz limpia, colores configurables, densidad compacta o cómoda, barra lateral ajustada y una entrada de configuración de Veyra. La apariencia de abajo es un esquema conceptual; <strong>todavía no existe un diseño visual aprobado ni implementado</strong>.</p>
+      <div class="wireframe" role="img" aria-label="Esquema conceptual de Spotify personalizado: barra de búsqueda superior, navegación lateral, biblioteca y playlists en el centro, y reproducción en la parte inferior."><div class="wire-top"><strong>Veyra · tu espacio musical</strong><span>Buscar en Spotify</span></div><div class="wire-body"><div class="wire-nav"><strong>Inicio</strong><span>Biblioteca</span><span>Favoritos</span><span>Ajustes de Veyra</span></div><div class="wire-main"><h3>Tu biblioteca</h3><div class="album-row"><div class="album"><div class="album-art"></div>Tu playlist</div><div class="album"><div class="album-art"></div>Un álbum</div><div class="album"><div class="album-art"></div>Favoritos</div></div></div></div><div class="wire-player"><span>Canción · Artista</span><span>Anterior · Reproducir · Siguiente</span></div></div>
+      <p class="concept">Esquema de distribución, sin conexión a Spotify ni controles de reproducción reales.</p>
+      <div class="note"><p><strong>Durante el reinicio:</strong> la ventana de Spotify puede desaparecer y reaparecer. Una ventana auxiliar que permanezca visible sería una ampliación posterior. El audio seguirá teniendo la interrupción asociada al reinicio.</p></div>
+    </section>
+
+    <section class="section" id="evidencias" aria-labelledby="h-evidencias">
+      <div class="section-head"><span class="section-number">05</span><h2 id="h-evidencias">Evidencias y límites</h2></div>
+      <p>La evidencia permite iniciar la implementación. Todavía no acredita el funcionamiento conjunto de Veyra en la instalación objetivo.</p>
+      <div class="table-wrap wide-table"><table><caption>Registro de evidencia disponible</caption><thead><tr><th scope="col">Evidencia</th><th scope="col">Qué establece</th><th scope="col">Qué sigue sin demostrar</th></tr></thead><tbody>
+        <tr><td>Prueba manual del usuario</td><td>El reinicio salta el anuncio en su Spotify de escritorio.</td><td>El mismo resultado en todas las versiones, cuentas y situaciones.</td></tr>
+        <tr><td>Código de Skipify revisado</td><td>Existe una implementación de detección y reinicio.</td><td>Recuperación correcta en el entorno objetivo.</td></tr>
+        <tr><td>Documentación de Spicetify</td><td>Existen temas, extensiones e interfaces del reproductor.</td><td>Persistencia de una personalización concreta ante todos los reinicios y actualizaciones.</td></tr>
+        <tr><td>Documentación y código de Adblockify</td><td>Declara bloqueo de anuncios y cambios locales.</td><td>Habilitación de DJ, Mix o todas las funciones Premium.</td></tr>
+        <tr><td>Investigación de REA</td><td>Puede apoyar futuras investigaciones; se ejecutó análisis estático sobre un ejemplo del propio proyecto REA.</td><td>Análisis del binario de Spotify o prueba de la integración de Veyra.</td></tr>
+      </tbody></table></div>
+      <div class="grid2"><article class="subpanel"><h3>Hallazgos en Skipify</h3><p>Rutas fijadas en código, esperas de duración fija, terminación forzada y teclas multimedia globales. El inicio automático se registra al ejecutarse.</p><p>La lógica de «última canción» puede guardar el título que desencadena la detección del anuncio. Son observaciones de código, no resultados de ejecución.</p></article><article class="subpanel"><h3>Compatibilidad de Spicetify</h3><p>La versión estable consultada, <strong>2.45.3</strong>, publicada el 3 de octubre de 2026, indica compatibilidad Windows hasta Spotify <strong>1.3.3</strong>.</p><p>Sus notas advierten que Microsoft Store puede requerir reaplicar Spicetify después de cerrar el cliente. La versión instalada se comprobará antes de modificarla.</p></article></div>
+      <h3 style="margin-top:26px">Funciones Premium: límite de la investigación</h3>
+      <p>No se ha encontrado una herramienta revisada que garantice DJ personal o Mix en una cuenta Free. Adblockify declara cambios de cola, repetición y reproducción aleatoria, pero enumera límites sobre descargas, calidad de audio, letras nativas y Jam. Que una opción aparezca en pantalla no demuestra que la función completa esté disponible.</p>
+      <p class="small muted">La documentación consultada puede cambiar. Las versiones y URLs se volverán a registrar durante la ejecución para vincular cada release de Veyra a una combinación concreta.</p>
+    </section>
+
+    <section class="section" id="roadmap" aria-labelledby="h-roadmap">
+      <div class="section-head"><span class="section-number">06</span><h2 id="h-roadmap">Roadmap de ejecución</h2></div>
+      <p class="lead">Siete fases con entregables y puertas de aceptación.</p>
+      <p>Las comprobaciones técnicas pendientes forman parte de la implementación y validación. No requieren reabrir la investigación general. Todas las fases de ejecución están pendientes.</p>
+      <div class="timeline" aria-label="Secuencia del roadmap"><a href="#p0"><b>P0</b>Entorno</a><a href="#p1"><b>P1</b>GitHub</a><a href="#p2"><b>P2</b>Validar base</a><a href="#p3"><b>P3</b>Integrar</a><a href="#p4"><b>P4</b>Personalizar</a><a href="#p5"><b>P5</b>Comprobar</a><a href="#p6"><b>P6</b>Publicar</a></div>
+      <div class="phase-toolbar"><p>Abre una fase para consultar sus tareas y criterios.</p><button type="button" class="button" id="toggle-phases">Expandir todas las fases</button></div>
+      <details class="phase" id="p0" open><summary><span class="phase-code">P0</span><span class="phase-title">Registrar y preservar el entorno</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Identificar versión de Windows y edición, origen y versión de Spotify.</li><li>Localizar instalación, configuración y personalizaciones existentes.</li><li>Registrar el comportamiento manual de reinicio aportado por el usuario.</li><li>Preparar las copias necesarias y un procedimiento de restauración antes de modificar el entorno.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> ficha del entorno y procedimiento de recuperación.</p><p><strong>Puerta de aceptación:</strong> componentes identificados y cambios previstos reversibles.</p><p><strong>Precaución de datos:</strong> copias y sesiones fuera del repositorio público.</p></div></div></details>
+      <details class="phase" id="p1"><summary><span class="phase-code">P1</span><span class="phase-title">Crear la base pública de Veyra</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Identificar la cuenta GitHub del promotor y crear el repositorio público; nombre propuesto: <code>veyra</code>.</li><li>Añadir README inicial, roadmap, licencia, atribuciones y estado real del proyecto.</li><li>Preparar estructura de documentación, integración, tema, scripts y pruebas.</li><li>Establecer exclusiones de Git para credenciales, sesiones, registros y copias personales.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> repositorio accesible con contexto y alcance claros.</p><p><strong>Puerta de aceptación:</strong> un tercero puede comprender el proyecto sin leer la conversación original.</p><p><strong>Licencia:</strong> MIT propuesta para código original; revisión y preservación de las licencias de terceros antes de copiar o empaquetar sus componentes.</p></div></div></details>
+      <details class="phase" id="p2"><summary><span class="phase-code">P2</span><span class="phase-title">Validar la combinación reutilizada</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Preparar la combinación Spotify + Spicetify + Skipify y observar detección, reinicio y reanudación.</li><li>Probar Adblockify aisladamente usando los mismos criterios funcionales.</li><li>Registrar versiones, resultado de cada ciclo e incidencias.</li><li>Seleccionar un único mecanismo inicial y documentar el motivo de la decisión.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> registro de pruebas y decisión del mecanismo por defecto.</p><p><strong>Puerta de aceptación:</strong> una combinación satisface el comportamiento básico.</p><p><strong>Regla:</strong> no elegir únicamente por las promesas de un README ni ejecutar ambos mecanismos de anuncios simultáneamente.</p></div></div></details>
+      <details class="phase" id="p3"><summary><span class="phase-code">P3</span><span class="phase-title">Preparar la integración</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Resolver dependencias y rutas sin depender de una instalación concreta.</li><li>Coordinar arranque, observación, cierre, reapertura y recuperación.</li><li>Añadir configuración, diagnóstico y límites de espera y reintento.</li><li>Hacer configurable el inicio automático; adaptar el registro implícito de Skipify si impide cumplir R11.</li><li>Aplicar correcciones mínimas justificadas y una extensión de integración solo cuando aporte una mejora comprobable.</li><li>Conservar la referencia al original y las diferencias si se necesita un fork.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> integración ejecutable y configurable.</p><p><strong>Puerta de aceptación:</strong> funcionamiento sin ajustes manuales ocultos, mecanismos duplicados ni bucles.</p><p><strong>Restricción de alcance:</strong> una reescritura completa queda fuera del roadmap.</p></div></div></details>
+      <details class="phase" id="p4"><summary><span class="phase-code">P4</span><span class="phase-title">Aplicar la personalización visual</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Adaptar un tema existente como base y definir los ajustes propios de Veyra.</li><li>Concretar color de acento, densidad, paneles y accesos visibles.</li><li>Añadir configuración accesible cuando sea necesaria.</li><li>Comprobar navegación, lectura, controles y persistencia tras varios cierres.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> perfil visual distribuible.</p><p><strong>Puerta de aceptación:</strong> UI utilizable y recuperada correctamente después de los reinicios.</p><p><strong>Límite:</strong> un rediseño completo o una ventana externa persistente se considera ampliación.</p></div></div></details>
+      <details class="phase" id="p5"><summary><span class="phase-code">P5</span><span class="phase-title">Validar el uso habitual</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Ejecutar las pruebas T01–T10 y registrar condiciones, resultados y límites.</li><li>Medir tiempo real de recuperación y comprobar canción, posición y cola.</li><li>Probar convivencia con otras aplicaciones y respeto del cierre o pausa manual.</li><li>Comprobar errores, límites de recuperación y retirada de la integración.</li><li>Repetir la instalación en una segunda instalación Windows.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> informe de validación y matriz de compatibilidad.</p><p><strong>Puerta de aceptación:</strong> requisitos cumplidos en la combinación publicada y limitaciones documentadas.</p><p><strong>Evidencia:</strong> separar pruebas automatizadas de las sesiones reales de audio y anuncios.</p></div></div></details>
+      <details class="phase" id="p6"><summary><span class="phase-code">P6</span><span class="phase-title">Publicar la primera release</span><span class="pill pending">Pendiente</span></summary><div class="phase-body"><h4>Trabajo previsto</h4><ul><li>Completar instalación, uso, configuración, diagnóstico y restauración.</li><li>Revisar licencias, atribuciones y contenido público.</li><li>Empaquetar archivos propios y componentes que puedan distribuirse conforme a sus licencias.</li><li>Añadir versiones probadas, notas de cambios, resultados e incidencias conocidas.</li><li>Publicar una release identificable en el repositorio público.</li></ul><div class="phase-result"><p><strong>Entregable:</strong> primera release pública de Veyra.</p><p><strong>Puerta de aceptación:</strong> un tercero puede instalar, utilizar y retirar el proyecto siguiendo la documentación.</p><p><strong>Estado:</strong> experimental hasta completar la validación. No presentar como probadas prestaciones todavía pendientes.</p></div></div></details>
+      <h3 style="margin-top:28px">Flujo de recuperación que debe implementar la integración</h3>
+      <div class="state-flow" aria-label="Estados de recuperación"><span>Esperando Spotify</span><i aria-hidden="true">→</i><span>Reproducción normal</span><i aria-hidden="true">→</i><span>Anuncio confirmado</span><i aria-hidden="true">→</i><span>Reinicio</span><i aria-hidden="true">→</i><span>Recuperación</span><i aria-hidden="true">→</i><span>Reproducción normal</span></div>
+      <p class="small">Un error o un límite agotado debe detener el ciclo y generar diagnóstico. La ausencia de datos, una ventana cargando o un título desconocido no se interpretarán automáticamente como publicidad. Una reapertura automática solo corresponde a un ciclo iniciado por el acompañante.</p>
+    </section>
+
+    <section class="section" id="validacion" aria-labelledby="h-validacion">
+      <div class="section-head"><span class="section-number">07</span><h2 id="h-validacion">Pruebas de aceptación</h2></div>
+      <div class="note amber"><p><strong>Objetivos propuestos, no resultados obtenidos.</strong> Las pruebas siguientes siguen pendientes y deberán quedar vinculadas a la versión y al entorno en que se ejecuten.</p></div>
+      <div class="table-wrap wide-table"><table><caption>Plan de validación y trazabilidad</caption><thead><tr><th scope="col">Prueba</th><th scope="col">Comprobación</th><th scope="col">Requisitos</th></tr></thead><tbody>
+        <tr><td><span class="id">T01</span> · Personalización</td><td>Tema, navegación y controles utilizables en la combinación elegida.</td><td>R01</td></tr>
+        <tr><td><span class="id">T02</span> · Ciclos reales</td><td>Al menos 20 eventos de anuncio en dos o más sesiones, registrando resultado e intervención necesaria.</td><td>R02, R03</td></tr>
+        <tr><td><span class="id">T03</span> · Falsos positivos</td><td>Al menos dos horas de contenido sin reinicios incorrectos en las condiciones probadas.</td><td>R02, R12</td></tr>
+        <tr><td><span class="id">T04</span> · Acciones manuales</td><td>Pausar, reanudar y cerrar Spotify sin actuaciones indebidas del acompañante.</td><td>R04</td></tr>
+        <tr><td><span class="id">T05</span> · Convivencia</td><td>Otro reproductor o navegador abierto no recibe órdenes destinadas a Spotify.</td><td>R05</td></tr>
+        <tr><td><span class="id">T06</span> · Persistencia</td><td>Repetir cierres y reaperturas y comprobar tema, configuración y estado.</td><td>R01, R03</td></tr>
+        <tr><td><span class="id">T07</span> · Fallos</td><td>Spotify ausente, ruta inválida, reapertura fallida y pérdida de señales.</td><td>R09, R12</td></tr>
+        <tr><td><span class="id">T08</span> · Instalación nueva</td><td>Seguir la documentación en una segunda instalación Windows y registrar los pasos necesarios.</td><td>R06, R10</td></tr>
+        <tr><td><span class="id">T09</span> · Restauración</td><td>Retirar la integración sin perder los datos personales.</td><td>R07</td></tr>
+        <tr><td><span class="id">T10</span> · Publicación</td><td>Revisar licencia, atribuciones, contenido público y ausencia de secretos.</td><td>R08, R09</td></tr>
+      </tbody></table></div>
+      <p>Se medirán el tiempo desde la detección hasta el regreso de la música y los resultados sobre canción, posición y cola. Las condiciones y límites se publicarán: superar una muestra no demuestra compatibilidad universal.</p>
+      <p>Las pruebas automatizadas se concentrarán en la lógica propia: clasificación de estados, límites de recuperación, configuración, rutas y prevención de ciclos duplicados. Las pruebas reales de audio y anuncios se registrarán separadamente.</p>
+      <p>R11 se comprobará adicionalmente activando y desactivando el inicio automático y el funcionamiento en segundo plano, verificando que la instalación repetida no duplica entradas.</p>
+    </section>
+
+    <section class="section" id="opensource" aria-labelledby="h-opensource">
+      <div class="section-head"><span class="section-number">08</span><h2 id="h-opensource">GitHub y distribución open source</h2></div>
+      <p class="lead">La entrega es una integración que otra persona puede instalar, usar y retirar.</p>
+      <p>El README explicará objetivo, requisitos, versiones probadas, instalación, configuración, pausa y desinstalación. También identificará las funcionalidades excluidas y las limitaciones conocidas.</p>
+      <div class="grid2"><article class="subpanel"><h3>Instalación y mantenimiento</h3><ul><li>Comprobar el entorno y conservar configuraciones existentes.</li><li>Ofrecer errores accionables y un procedimiento de restauración.</li><li>Evitar duplicados al repetir la preparación.</li><li>Identificar versiones de dependencias y comprobar la combinación tras actualizar.</li><li>Conservar la sesión oficial de Spotify sin pedir credenciales al proyecto.</li></ul></article><article class="subpanel"><h3>Contenido del repositorio</h3><ul><li>Código y configuración propios, licencia y atribuciones.</li><li>Documentación de arquitectura, instalación y compatibilidad.</li><li>Pruebas y evidencia de validación vinculadas a cada release.</li><li>Registros personales, sesiones, credenciales y copias excluidos de Git.</li><li>Spotify obtenido desde su distribución oficial.</li></ul></article></div>
+      <h3 style="margin-top:26px">Estructura conceptual del repositorio</h3>
+      <pre><code>veyra/
+├── README.md
+├── LICENSE
+├── THIRD_PARTY_NOTICES.md
+├── CHANGELOG.md
+├── ROADMAP.md
+├── docs/
+│   ├── architecture.md
+│   ├── compatibility.md
+│   ├── installation.md
+│   ├── troubleshooting.md
+│   └── validation.md
+├── theme/
+├── integration/
+├── scripts/
+├── tests/
+└── .github/workflows/</code></pre>
+      <p class="small muted">Propuesta de organización del repositorio futuro. No representa archivos de implementación ya creados.</p>
+      <h3>Contenido obligatorio de cada release</h3>
+      <ul><li>Versiones de componentes probados y entorno de validación.</li><li>Cambios incorporados e instrucciones de instalación y restauración.</li><li>Resultados de pruebas e incidencias conocidas.</li><li>Limitaciones del mecanismo de anuncios.</li><li>Diferencias respecto a proyectos de los que se haya mantenido un fork.</li></ul>
+      <p>Se incorporarán comprobaciones automáticas adecuadas para los scripts o código que Veyra mantenga. No se presentará una validación automática de anuncios si depende de una sesión real.</p>
+    </section>
+
+    <section class="section" id="riesgos" aria-labelledby="h-riesgos">
+      <div class="section-head"><span class="section-number">09</span><h2 id="h-riesgos">Registro de riesgos</h2></div>
+      <div class="table-wrap wide-table"><table><thead><tr><th scope="col">Riesgo</th><th scope="col">Consecuencia</th><th scope="col">Tratamiento previsto</th></tr></thead><tbody>
+        <tr><td>Actualización de Spotify</td><td>Cambios en detección, UI o recuperación.</td><td>Matriz de compatibilidad y comprobación después de actualizar.</td></tr>
+        <tr><td>Microsoft Store</td><td>Personalización que no persiste al cerrar.</td><td>Comprobar edición y preferir combinación documentada y probada.</td></tr>
+        <tr><td>Detección incorrecta</td><td>Interrupción de música.</td><td>Clasificación explícita, estados desconocidos y pruebas de falsos positivos.</td></tr>
+        <tr><td>Reapertura fallida</td><td>Spotify queda cerrado.</td><td>Esperas acotadas, diagnóstico y detención del ciclo.</td></tr>
+        <tr><td>Controles globales</td><td>Otra aplicación recibe una orden.</td><td>Evaluar controles dirigidos a la sesión de Spotify.</td></tr>
+        <tr><td>Pérdida de estado</td><td>Canción, posición o cola diferentes.</td><td>Medir y documentar lo que conserva la combinación.</td></tr>
+        <tr><td>Dos mecanismos activos</td><td>Comportamientos difíciles de atribuir.</td><td>Un único mecanismo seleccionado.</td></tr>
+        <tr><td>Dependencia abandonada</td><td>Mantenimiento propio creciente.</td><td>Versiones identificadas y cambios mínimos documentados.</td></tr>
+        <tr><td>Confusión sobre Premium</td><td>Expectativas que Veyra no cumple.</td><td>Prestaciones verificadas y exclusiones expresas.</td></tr>
+        <tr><td>Condiciones de Spotify</td><td>Restricciones al uso previsto.</td><td>Documentar la restricción existente sin afirmar que Veyra concede autorización.</td></tr>
+      </tbody></table></div>
+      <p class="small">Spotify restringe expresamente el bloqueo de anuncios y determinadas modificaciones en sus <a href="https://www.spotify.com/es/legal/user-guidelines/" target="_blank" rel="noopener noreferrer">directrices de usuario</a>. La licencia open source del código de Veyra y las licencias de las herramientas no sustituyen esas condiciones.</p>
+    </section>
+
+    <section class="section" id="esfuerzo" aria-labelledby="h-esfuerzo">
+      <div class="section-head"><span class="section-number">10</span><h2 id="h-esfuerzo">Esfuerzo y criterio de cierre</h2></div>
+      <p class="lead"><strong>20–40 horas efectivas</strong> como estimación inicial para una integración pública y cuidada, partiendo de herramientas que funcionen en la combinación elegida y de un tema existente.</p>
+      <p>Problemas importantes de compatibilidad, un rediseño completo o cambios extensos en un fork ampliarían ese esfuerzo. Las sesiones de escucha pueden alargar el calendario aunque no requieran atención continua. No es un plazo comprometido ni una medición de trabajo ya ejecutado.</p>
+      <div class="table-wrap"><table><caption>Estimación por bloque de trabajo</caption><thead><tr><th scope="col">Bloque</th><th scope="col">Esfuerzo orientativo</th></tr></thead><tbody><tr><td>Entorno, preservación y repositorio</td><td>2–4 h</td></tr><tr><td>Comparación funcional de combinaciones</td><td>3–6 h</td></tr><tr><td>Integración y correcciones acotadas</td><td>5–10 h</td></tr><tr><td>Personalización visual</td><td>4–8 h</td></tr><tr><td>Validación, documentación y release</td><td>6–12 h</td></tr><tr><td>Total</td><td><strong>20–40 h</strong></td></tr></tbody></table></div>
+      <h3>Estado al cerrar la planificación</h3>
+      <div class="table-wrap"><table><thead><tr><th scope="col">Área</th><th scope="col">Estado</th></tr></thead><tbody><tr><td>Contexto, objetivo y alcance</td><td><span class="pill neutral">Definidos</span></td></tr><tr><td>Herramientas candidatas</td><td><span class="pill neutral">Identificadas</span></td></tr><tr><td>Arquitectura y reutilización</td><td><span class="pill neutral">Decididas</span></td></tr><tr><td>Roadmap y criterios de aceptación</td><td><span class="pill neutral">Definidos</span></td></tr><tr><td>Pruebas en la instalación objetivo</td><td><span class="pill pending">Pendientes</span></td></tr><tr><td>Implementación de Veyra</td><td><span class="pill pending">Pendiente</span></td></tr><tr><td>Repositorio público y release</td><td><span class="pill pending">Pendientes</span></td></tr></tbody></table></div>
+      <div class="closing"><h3>Criterio de finalización del proyecto</h3><p>Una release pública que otra persona pueda instalar, usar y retirar siguiendo la documentación, con UI personalizada, mecanismo de anuncios comprobado, límites conocidos y compatibilidad declarada.</p><p><strong>Primera actividad de ejecución: P0.</strong> Registrar y preservar el entorno de Spotify de escritorio. Este documento es la referencia para evaluar decisiones, pruebas y preparación de la publicación.</p></div>
+    </section>
+
+    <section class="section" id="fuentes" aria-labelledby="h-fuentes">
+      <div class="section-head"><span class="section-number">11</span><h2 id="h-fuentes">Fuentes de referencia</h2></div>
+      <p class="small muted">Fuentes primarias consultadas durante la investigación. Las referencias se abren en el navegador y requieren conexión; el contenido de este documento, la navegación y la impresión funcionan sin conexión.</p>
+      <ul class="sources">
+        <li><a href="https://spicetify.app/docs/customization" target="_blank" rel="noopener noreferrer">Spicetify · Personalización</a><small>Temas, extensiones y aplicaciones personalizadas.</small></li>
+        <li><a href="https://spicetify.app/docs/development/api-wrapper/methods/player" target="_blank" rel="noopener noreferrer">Spicetify · Interfaz del reproductor</a><small>Estado, controles y eventos de reproducción.</small></li>
+        <li><a href="https://github.com/spicetify/cli/releases/tag/v2.45.3" target="_blank" rel="noopener noreferrer">Spicetify 2.45.3 · Compatibilidad</a><small>Publicación de 3 oct 2026 y advertencia sobre Microsoft Store.</small></li>
+        <li><a href="https://github.com/adhityanadooli/Skipify/blob/main/Program.cs" target="_blank" rel="noopener noreferrer">Skipify · Código revisado</a><small>Detección, reinicio, recuperación e inicio automático.</small></li>
+        <li><a href="https://github.com/adhityanadooli/Skipify/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Skipify · Licencia MIT</a><small>Condiciones de reutilización y atribución.</small></li>
+        <li><a href="https://github.com/rxri/spicetify-extensions/blob/main/adblock/README.md" target="_blank" rel="noopener noreferrer">Adblockify · Alcance declarado</a><small>Capacidades y limitaciones enumeradas por su autor.</small></li>
+        <li><a href="https://github.com/SpotX-Official/SpotX" target="_blank" rel="noopener noreferrer">SpotX</a><small>Alternativa de parches investigada; fuera de las dependencias iniciales.</small></li>
+        <li><a href="https://github.com/mrpond/BlockTheSpot" target="_blank" rel="noopener noreferrer">BlockTheSpot</a><small>Alternativa de modificación nativa investigada.</small></li>
+        <li><a href="https://github.com/librespot-org/librespot" target="_blank" rel="noopener noreferrer">librespot</a><small>Biblioteca de reproducción; declara requisito de Premium.</small></li>
+        <li><a href="https://github.com/team-spotube/spotube" target="_blank" rel="noopener noreferrer">Spotube</a><small>Reproductor independiente con proveedores mediante plugins.</small></li>
+        <li><a href="https://support.spotify.com/us/article/dj/" target="_blank" rel="noopener noreferrer">Spotify · DJ</a><small>Disponibilidad y características oficiales.</small></li>
+        <li><a href="https://support.spotify.com/us/article/mixed-playlists/" target="_blank" rel="noopener noreferrer">Spotify · Listas mezcladas</a><small>Diferencias entre Premium y Free y limitaciones de reproducción.</small></li>
+        <li><a href="https://learn.microsoft.com/en-us/uwp/api/windows.media.control.globalsystemmediatransportcontrolssession?view=winrt-26100" target="_blank" rel="noopener noreferrer">Microsoft · Sesiones multimedia</a><small>Interfaces dirigidas a sesiones de reproducción de otras aplicaciones.</small></li>
+        <li><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core" target="_blank" rel="noopener noreferrer">Microsoft · Soporte de .NET</a><small>Referencia para actualizar dependencias si se adapta Skipify.</small></li>
+        <li><a href="https://github.com/morluto/rea" target="_blank" rel="noopener noreferrer">REA · Reverse Engineer Anything</a><small>Herramienta de apoyo a la investigación, no dependencia de Veyra.</small></li>
+        <li><a href="https://www.spotify.com/es/legal/user-guidelines/" target="_blank" rel="noopener noreferrer">Spotify · Directrices de usuario</a><small>Restricciones aplicables al uso previsto.</small></li>
+      </ul>
+    </section>
+    <footer class="footer"><span><strong>Veyra</strong> · Roadmap y contexto del proyecto · v1.0</span><span>19 de octubre de 2026 · Investigación y planificación cerradas</span><span class="print-note">Documento completo preparado para impresión.</span></footer>
+  </main>
+</div>
+<script>
+(() => {
+  'use strict';
+  const phases = Array.from(document.querySelectorAll('details.phase'));
+  const topButton = document.getElementById('expand-all');
+  const phaseButton = document.getElementById('toggle-phases');
+  const printButton = document.getElementById('print-document');
+  const allOpen = () => phases.every(phase => phase.open);
+  const updateButtons = () => {
+    const open = allOpen();
+    topButton.textContent = open ? 'Contraer fases' : 'Expandir fases';
+    phaseButton.textContent = open ? 'Contraer todas las fases' : 'Expandir todas las fases';
+    topButton.setAttribute('aria-expanded', String(open));
+    phaseButton.setAttribute('aria-expanded', String(open));
+  };
+  const toggleAll = () => {
+    const next = !allOpen();
+    phases.forEach(phase => { phase.open = next; });
+    updateButtons();
+  };
+  topButton.addEventListener('click', toggleAll);
+  phaseButton.addEventListener('click', toggleAll);
+  phases.forEach(phase => phase.addEventListener('toggle', updateButtons));
+  let printState = null;
+  window.addEventListener('beforeprint', () => {
+    if (printState === null) printState = phases.map(phase => phase.open);
+    phases.forEach(phase => { phase.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    if (printState !== null) {
+      phases.forEach((phase, index) => { phase.open = printState[index]; });
+      printState = null;
+    }
+    updateButtons();
+  });
+  printButton.addEventListener('click', () => window.print());
+  const navigationLinks = Array.from(document.querySelectorAll('.toc a'));
+  navigationLinks.forEach(link => link.addEventListener('click', () => {
+    navigationLinks.forEach(other => other.removeAttribute('aria-current'));
+    link.setAttribute('aria-current', 'location');
+  }));
+  document.querySelectorAll('.timeline a').forEach(link => link.addEventListener('click', () => {
+    const phase = document.getElementById(link.hash.slice(1));
+    if (phase) phase.open = true;
+  }));
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) navigationLinks.forEach(link => {
+        if (link.hash === '#' + visible[0].target.id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-5% 0px -65% 0px', threshold: 0 });
+    document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
+  }
+  updateButtons();
+})();
+</script>
+</body>
+</html>

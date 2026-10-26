@@ -1,0 +1,26 @@
+name: Validate project foundation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  foundation:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check repository, privacy and PowerShell syntax
+        shell: ${{ matrix.shell }}
+        run: ./tests/Test-Repository.ps1
+      - name: Verify isolated restoration and invalid inputs
+        shell: ${{ matrix.shell }}
+        run: ./tests/Test-Restoration.ps1
