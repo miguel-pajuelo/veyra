@@ -6,6 +6,8 @@ P0: copia verificada de 5 archivos, 18.017 bytes; ensayo aislado de restauració
 
 Estas comprobaciones no prueban audio, anuncios, persistencia de Spicetify ni recuperación del cliente. T01–T10 siguen pendientes para la integración.
 
+Actualización P2: las sondas de [candidatos](../tests/p2/README.md) y el ensayo local de [evaluación](p2-validation.md) acreditan compilación, carga, reinicios y progreso de reproducción en una combinación de prueba. No se observó un anuncio real y la puerta funcional sigue pendiente. La prueba de restauración incluye ahora siete comprobaciones y resuelve rutas físicas de archivos.
+
 ## Requisitos
 
 | ID | Condición de cumplimiento | Evidencia prevista | Estado |

@@ -11,6 +11,8 @@ $snapshot.BackupPath
 
 El destino predeterminado es `%LOCALAPPDATA%/Veyra/backups/<identificador>`. El script rechaza destinos dentro del proyecto o las raíces de OneDrive conocidas. Conserva preferencias Spotify y, si existen, configuración y carpetas Themes/Extensions/CustomApps de Spicetify en las ubicaciones revisadas.
 
+En un proceso empaquetado, Windows puede redirigir esa ubicación a la caché privada del anfitrión. `BackupPath` devuelve ahora la ruta física mediante un identificador de archivo de Windows. Se debe utilizar ese valor cuando otra aplicación o una sesión normal de PowerShell acceda a la copia; la ruta lógica puede apuntar a otro lugar fuera del anfitrión.
+
 Cada archivo se compara antes y después de copiar con SHA-256. Si cambia repetidamente, el script falla: cerrar Spotify y repetir. Una copia fallida sin manifiesto válido no debe usarse. El registro de inicio se guarda únicamente como referencia privada; no se modifica ni restaura automáticamente.
 
 ## Previsualizar sin modificar

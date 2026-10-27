@@ -6,7 +6,7 @@ Estado a 26 de octubre de 2026. Referencia: [documento original](Veyra_Roadmap_y
 |---|---|---|
 | P0 Entorno y preservación | Completada | Sistema y Spotify identificados, preferencias copiadas fuera de OneDrive, hashes verificados y recuperación ensayada en destino aislado. [Evidencia](docs/environment.md). |
 | P1 Base pública | Completada | Repositorio público, documentación, MIT para código original, avisos de terceros, estructura y exclusiones de datos privados. |
-| P2 Validar combinación | Pendiente | Pruebas separadas de Spotify + Spicetify + acompañante y Adblockify; versiones fijadas y elección de un único mecanismo. |
+| P2 Validar combinación | Evaluación técnica realizada; aceptación pendiente | Versiones fijadas, compilación, carga, reinicios y reproducción comprobados. Falta un evento real de publicidad y la elección funcional definitiva. [Resultados](docs/p2-validation.md). |
 | P3 Integrar | Pendiente | Ejecutable configurable, rutas detectadas, controles dirigidos, límites de recuperación, bandeja, registros e inicio automático configurable. |
 | P4 Personalizar | Pendiente | Tema adaptado, colores y densidad definidos, navegación y controles legibles, persistencia comprobada. |
 | P5 Validar uso habitual | Pendiente | T01–T10, mediciones reales, matriz de compatibilidad y segunda instalación Windows. |
@@ -30,11 +30,9 @@ Estado a 26 de octubre de 2026. Referencia: [documento original](Veyra_Roadmap_y
 
 ## Siguiente hito: P2
 
-1. Comprobar persistencia de Spicetify en la edición seleccionada.
-2. Revisar y compilar el acompañante antes de ejecutarlo: sus efectos de inicio automático y controles globales requieren atención.
-3. Registrar detección, recuperación, tiempo e intervención de la combinación inicial.
-4. Comparar Adblockify por separado.
-5. Fijar componentes y mecanismo antes de ampliar el desarrollo.
+La evaluación de candidatos está registrada en [P2](docs/p2-validation.md). Store funciona con el arranque de Spicetify y rutas físicas; Skipify compila pero presenta tres falsos positivos reproducidos; Adblockify carga y permite reproducción en su ensayo separado.
+
+Quedan observar publicidad real, validar el ciclo ante ese evento y elegir el mecanismo. No se ha superado todavía la puerta funcional de P2 y no se presenta P3 como iniciado.
 
 ## Cierre del proyecto
 

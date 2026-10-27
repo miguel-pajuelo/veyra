@@ -95,8 +95,9 @@ $manifest = [ordered]@{
     Sources = @($sourceIndex); Files = @($items); StartupReference = @($startup)
 }
 $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $snapshotPath 'manifest.json') -Encoding UTF8
+$physicalManifest = & (Join-Path $PSScriptRoot 'Resolve-VeyraPhysicalPath.ps1') -Path (Join-Path $snapshotPath 'manifest.json')
 [pscustomobject]@{
-    BackupPath = $snapshotPath; Files = $items.Count
+    BackupPath = (Split-Path $physicalManifest -Parent); Files = $items.Count
     Bytes = ($items | Measure-Object Bytes -Sum).Sum
     Verified = $true
 }

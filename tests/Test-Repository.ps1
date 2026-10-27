@@ -8,7 +8,7 @@ $required = @(
     'docs/architecture.md', 'docs/compatibility.md', 'docs/installation.md', 'docs/restoration.md',
     'docs/troubleshooting.md', 'docs/validation.md', 'docs/environment.md',
     'integration/README.md', 'theme/README.md', 'scripts/Backup-VeyraEnvironment.ps1',
-    'scripts/Restore-VeyraEnvironment.ps1', 'tests/Test-Restoration.ps1', '.github/workflows/validate.yml'
+    'scripts/Restore-VeyraEnvironment.ps1', 'scripts/Resolve-VeyraPhysicalPath.ps1', 'tests/Test-Restoration.ps1', '.github/workflows/validate.yml'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw ('Missing required file: ' + $relative) }
@@ -19,7 +19,7 @@ $privatePattern = '(^|/)(\.codex|backups|restore-drills|pre-restore|logs|node_mo
 foreach ($relative in $tracked) {
     if ($relative -match $privatePattern) { throw ('Private or generated file tracked: ' + $relative) }
     $fullPath = Join-Path $root $relative
-    if ($relative -match '\.(md|ps1|html|yml|json)$') {
+    if ($relative -match '\.(md|ps1|html|yml|json|cs|csproj)$') {
         $content = Get-Content -LiteralPath $fullPath -Raw -Encoding UTF8
         if ($content -match 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----') {
             throw ('Possible credential in public file: ' + $relative)

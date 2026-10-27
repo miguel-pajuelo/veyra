@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-26",
+  "purpose": "P2 candidate evaluation; not a production dependency declaration",
+  "spotify": {
+    "edition": "Microsoft Store",
+    "executableVersion": "1.3.6.1921",
+    "packageVersion": "1.306.1921.0",
+    "redistributed": false
+  },
+  "spicetify": {
+    "version": "2.46.4",
+    "commit": "c3fd98f6fbf922ae944d1ecd64f97c380d04368e",
+    "repository": "https://github.com/spicetify/cli",
+    "license": "LGPL-2.1",
+    "asset": "spicetify-2.46.4-windows-x64.zip",
+    "assetSha256": "0490380bf59e00c94cf6cb12bfac5152791b91bb8009aceef53c49815b45a56f",
+    "fetchedCssMapSha256": "d1a23787f616b2ff1e1cd0ff053ffee6c88a3c9511e43ac885a9b80ddf29bb91"
+  },
+  "skipify": {
+    "repository": "https://github.com/adhityanadooli/Skipify",
+    "commit": "d1a8e6aee5715174cb373519d08ed0c95e171cd1",
+    "license": "MIT",
+    "upstreamTargetFramework": "net6.0",
+    "upstreamPublish": "Succeeded, win-x64 self-contained",
+    "privateRuntimeProbeTarget": "net10.0-windows10.0.19041.0",
+    "privateRuntimeProbeHostingPackage": "10.0.0",
+    "redistributed": false
+  },
+  "adblockify": {
+    "repository": "https://github.com/rxri/spicetify-extensions",
+    "commit": "5da6cf1bb723f9efd0177f5fa4f4673b9e0c0936",
+    "path": "adblock/adblock.js",
+    "sha256": "dce18725b6ea88992c7e5ebe385a15cb974724cb81fb3be3010d61e61cbc453f",
+    "license": "MIT",
+    "redistributed": false
+  }
+}

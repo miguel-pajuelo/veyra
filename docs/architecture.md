@@ -5,8 +5,8 @@
 | Pieza | Responsabilidad | Estado |
 |---|---|---|
 | Spotify oficial | Audio, biblioteca, navegación y sesión | Instalación existente identificada |
-| Spicetify y tema Veyra | Personalización y ajustes dentro del cliente | Pendiente de instalación y desarrollo |
-| Acompañante Windows | Observación, coordinación y diagnóstico fuera del cliente | Skipify como candidato inicial, sin código incorporado |
+| Spicetify y tema Veyra | Personalización y ajustes dentro del cliente | Copia Spicetify de ensayo verificada en P2; tema pendiente |
+| Acompañante Windows | Observación, coordinación y diagnóstico fuera del cliente | Skipify fijado y compilado; sin integración distribuida |
 | Extensión de integración | Comunicar señales y ajustes si resulta necesaria | Opcional, requiere necesidad demostrada |
 | Scripts de preservación | Copiar y restaurar ajustes seleccionados | Disponibles y comprobados |
 

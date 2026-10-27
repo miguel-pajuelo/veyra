@@ -6,7 +6,7 @@ Integración experimental para personalizar Spotify de escritorio en Windows, re
 
 ## Estado del proyecto
 
-26 de octubre de 2026: P0 (inventario y preservación) y P1 (base del proyecto) completados. Este repositorio contiene documentación, scripts de copia/restauración y comprobaciones de esa base. La integración de anuncios, el acompañante de bandeja y el tema Veyra todavía no están implementados ni validados. No hay una release instalable de Veyra.
+26 de octubre de 2026: P0 y P1 completados; [evaluación técnica de P2 realizada](docs/p2-validation.md), con aceptación funcional pendiente de publicidad real. Este repositorio contiene documentación, scripts de copia/restauración, resolución de rutas físicas y sondas de candidatos. La integración de anuncios, el acompañante de bandeja y el tema Veyra todavía no están implementados ni validados. No hay una release instalable de Veyra.
 
 El documento [Roadmap y contexto original](Veyra_Roadmap_y_Contexto_del_Proyecto.html), de 19 de octubre de 2026, se conserva sin editar como referencia histórica. El estado vigente se mantiene en [ROADMAP.md](ROADMAP.md) y [CHANGELOG.md](CHANGELOG.md).
 
@@ -33,6 +33,7 @@ DJ, Mix, descargas, calidad reservada, soporte móvil, sustitución del motor de
 | [Restauración](docs/restoration.md) | Verificación, ensayo y recuperación de preferencias |
 | [Arquitectura](docs/architecture.md) | Responsabilidades y decisiones |
 | [Compatibilidad](docs/compatibility.md) | Versiones identificadas y pruebas pendientes |
+| [Evaluación P2](docs/p2-validation.md) | Compilación, carga, persistencia, reproducción y puerta pendiente |
 | [Validación](docs/validation.md) | Requisitos R01–R12 y pruebas T01–T10 |
 | [Diagnóstico](docs/troubleshooting.md) | Incidencias conocidas y pasos concretos |
 | [Terceros](THIRD_PARTY_NOTICES.md) | Componentes candidatos, licencias y atribuciones |

@@ -11,6 +11,8 @@ $filePath = Join-Path $snapshotPath $storedPath
 New-Item -ItemType Directory -Path (Split-Path $filePath -Parent) -Force | Out-Null
 $expectedBytes = [byte[]](0, 1, 2, 10, 13, 65, 128, 200, 255)
 [IO.File]::WriteAllBytes($filePath, $expectedBytes)
+$physicalFile = & (Join-Path $repoRoot 'scripts\Resolve-VeyraPhysicalPath.ps1') -Path $filePath
+if ([Convert]::ToBase64String([IO.File]::ReadAllBytes($physicalFile)) -ne [Convert]::ToBase64String($expectedBytes)) { throw 'Physical path does not address the preserved file.' }
 $manifest = @{
     SchemaVersion = 1
     Sources = @(@{ Id = 'spotify-store'; Root = (Join-Path $testRoot 'original'); Kind = 'Spotify' })
@@ -60,4 +62,4 @@ $manifest.Files[0].RelativePath = 'Users\fixture-user\prefs'
 Write-FixtureManifest
 
 Assert-Rejected { & $restoreScript -BackupPath $snapshotPath -DestinationDirectory (Join-Path $snapshotPath 'nested-output') } 'drill inside snapshot'
-[pscustomobject]@{ Result = 'PASS'; Checks = 6; Scope = 'Isolated file restoration; no Spotify interaction' }
+[pscustomobject]@{ Result = 'PASS'; Checks = 7; Scope = 'Isolated file restoration and physical path; no Spotify interaction' }

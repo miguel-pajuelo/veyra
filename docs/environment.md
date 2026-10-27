@@ -1,6 +1,6 @@
 # Entorno y preservación — P0
 
-Inspección y copia realizadas el 26 de octubre de 2026. Esta ficha pública omite identificadores de cuenta y rutas personales.
+Inspección y copia iniciales de P0 realizadas el 26 de octubre de 2026. Esta ficha pública omite identificadores de cuenta y rutas personales. Las pruebas posteriores de Spicetify y candidatos se registran en [P2](p2-validation.md).
 
 | Elemento | Resultado |
 |---|---|
